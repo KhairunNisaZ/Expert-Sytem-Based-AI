@@ -60,7 +60,7 @@
     (charging F|S)
     =>
     (assert (mobil lexusUX))
-    (printout t "Mobil yang cocok dengan kriteria anda adalah Lexus UX300e" crlf)
+    (printout t "Mobil yang cocok dengan kriteria anda adalah Lexus UX300e." crlf)
 )
 
 (defrule mitsubishiOutlander

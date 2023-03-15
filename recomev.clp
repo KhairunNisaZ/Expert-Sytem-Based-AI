@@ -3,7 +3,7 @@
     (assert (input Data))
     (printout t crlf "------------------Rekomendasi Mobil Listrik--------------------" crlf)
     (printout t "Apa jenis teknologi yang anda inginkan dari mobil listrik?" crlf)
-    (printout t "[B: BEV (full baterai), P: PHEV (BBM dan baterai)]: ")
+    (printout t "[E: BEV (full baterai), P: PHEV (BBM dan baterai)]: ")
     (assert (jenis (read)))
     (printout t "Berapa range harga yang anda inginkan?" crlf)
     (printout t "[A: 240-650 juta, B: 651-900 juta, C: 901 juta - 3 miliar]: ")
@@ -17,7 +17,7 @@
 ) 
 
 (defrule hyundaiIonic
-    (jenis B)
+    (jenis E)
     (harga B)
     (baterai 3)
     (charging F)
@@ -28,7 +28,7 @@
 )
 
 (defrule wulingAir
-    (jenis B)
+    (jenis E)
     (harga A)
     (baterai 2)
     (charging S) 
@@ -39,7 +39,7 @@
 )
 
 (defrule teslaModel
-    (jenis B)
+    (jenis E)
     (harga C)
     (baterai 3)
     (charging F|S)
@@ -50,7 +50,7 @@
 )
 
 (defrule bmwI
-    (jenis B)
+    (jenis E)
     (harga C)
     (baterai 3)
     (charging F)
@@ -61,7 +61,7 @@
 )
 
 (defrule lexusUX
-    (jenis B)
+    (jenis E)
     (harga C)
     (baterai 2)
     (charging F|S)

@@ -120,7 +120,7 @@
     (ask again)
     =>
     (printout t crlf "////////////////////////////////////////////////////////////////////////////////" crlf)
-    (printout t crlf "Apakah ingin mengisi lagi? [y/n]: " crlf)
+    (printout t crlf "Apakah anda ingin mencoba lagi? [y/n]: " crlf)
     (assert (decision (read)))
 )
 

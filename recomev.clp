@@ -1,5 +1,24 @@
-(defrule ask
+(defrule diri
     =>
+    (printout t crlf "Masukkan nama anda: ")
+    (assert (nama (read)))
+)
+
+(defrule intro
+    (nama ?name)
+    =>
+    (printout t crlf "              *********** Halo "?name" **********              " crlf)
+    (printout t crlf "              WELCOME TO ELECTRIC CAR RECCOMENDER              " crlf)
+)
+
+(deffacts again
+    (again yes)
+)
+
+(defrule ask
+    ?a <- (again yes)
+    =>
+    (retract ?a)
     (assert (input Data))
     (printout t crlf "------------------Rekomendasi Mobil Listrik--------------------" crlf)
     (printout t "Apa jenis teknologi yang anda inginkan dari mobil listrik?" crlf)
@@ -14,7 +33,7 @@
     (printout t "Berapa charging time mobil yang anda inginkan?" crlf)
     (printout t "[F: 30 menit-7 jam, S: 8-11 jam]: ")
     (assert (charging (read)))
-) 
+)
 
 (defrule hyundaiIonic
     (jenis E)
@@ -25,6 +44,7 @@
     (assert (mobil hyundaiIonic))
     (printout t crlf "-----------------------REKOMENDASI--------------------------" crlf)
     (printout t "Mobil yang cocok dengan kriteria anda adalah Hyundai Ionic 5" crlf)
+    (assert (ask again))
 )
 
 (defrule wulingAir
@@ -36,6 +56,7 @@
     (assert (mobil wulingAir))
     (printout t crlf "----------------------REKOMENDASI-------------------------" crlf)
     (printout t "Mobil yang cocok dengan kriteria anda adalah Wuling Air ev" crlf)
+    (assert (ask again))
 )
 
 (defrule teslaModel
@@ -47,6 +68,7 @@
     (assert (mobil teslaModel))
     (printout t crlf "----------------------REKOMENDASI-------------------------" crlf)
     (printout t "Mobil yang cocok dengan kriteria anda adalah Tesla Model 3" crlf)
+    (assert (ask again))
 )
 
 (defrule bmwI
@@ -58,6 +80,7 @@
     (assert (mobil bmwI))
     (printout t crlf "-------------------REKOMENDASI---------------------" crlf)
     (printout t "Mobil yang cocok dengan kriteria anda adalah BMW i4" crlf)
+    (assert (ask again))
 )
 
 (defrule lexusUX
@@ -69,6 +92,7 @@
     (assert (mobil lexusUX))
     (printout t crlf "----------------------REKOMENDASI------------------------" crlf)
     (printout t "Mobil yang cocok dengan kriteria anda adalah Lexus UX300e" crlf)
+    (assert (ask again))
 )
 
 (defrule mitsubishiOutlander
@@ -80,6 +104,7 @@
     (assert (mobil mitsubishiOutlander))
     (printout t crlf "----------------------------REKOMENDASI-------------------------------" crlf)
     (printout t "Mobil yang cocok dengan kriteria anda adalah Mitsubishi Outlander PHEV" crlf)
+    (assert (ask again))
 )
 
 (defrule error
@@ -88,4 +113,27 @@
     =>
     (printout t crlf "-----------------------------REKOMENDASI--------------------------------" crlf)
     (printout t "Tidak dapat memberikan rekomendasi mobil dengan kriteria yang anda pilih" crlf)
+    (assert (ask again))
+)
+
+(defrule askagain
+    (ask again)
+    =>
+    (printout t crlf "////////////////////////////////////////////////////////////////////////////////" crlf)
+    (printout t crlf "Apakah ingin mengisi lagi? [y/n]: " crlf)
+    (assert (decision (read)))
+)
+
+(defrule repeat
+    (decision y)
+    =>
+    (retract *)
+    (assert (again yes))
+)
+
+(defrule notRepeat
+    (and (or (decision n) (not (decision y))))
+    =>
+    (printout t crlf "Terima kasih!" crlf)
+    (halt)
 )
